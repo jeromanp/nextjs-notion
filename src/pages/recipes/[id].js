@@ -61,13 +61,16 @@ export const getStaticProps = async ({ params: { id } }) => {
   const method = [];
 
   blocks.results.forEach((block) => {
-    if (block.type === "bulleted_list_item") {
-      ingredients.push(block.bulleted_list_item);
+    if (block.type === "numbered_list_item") {
+      ingredients.push(block.numbered_list_item.rich_text[0].text.content);
     }
 
-    if (block.type === "numbered_list_item") {
-      method.push(block.numbered_list_item);
+    // console.log("BLOCKS ====>",blocks.results[0]);
+
+    if (block.type === "paragraph" && block.paragraph.rich_text[0]) {
+      method.push(block.paragraph.rich_text[0].text.content);
     }
+    console.log(block);
   });
 
   return {
