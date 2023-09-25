@@ -11,7 +11,7 @@ const Recipe = ({ recipe }) => {
         </button>
       </Link>
       <h1 className="text-red-800 text-3xl">Recet: {recipe.title}</h1>
-      <pre>{JSON.stringify(recipe, null, 2)}</pre>);
+      <pre>{JSON.stringify(recipe, null, 2)}</pre>;
     </div>
   );
 };
