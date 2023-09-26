@@ -15,13 +15,11 @@ const BlogPage = ({ blogs }) => {
       <div>
         <h1 className="p-12 text-4xl flex justify-center">Nuestros Blogs:</h1>
         {blogs.map((blog) => (
-          <p key={blog}>
-            <Link href={`/blogs/${slugify(blog).toLowerCase()}`}>
-              <ul>
-                <li className="text-xl">- {blog}</li>
-              </ul>
-            </Link>
-          </p>
+          <Link href={`/blogs/${slugify(blog).toLowerCase()}`}>
+            <ul key={blog}>
+              <li className="text-xl">- {blog}</li>
+            </ul>
+          </Link>
         ))}
       </div>
 

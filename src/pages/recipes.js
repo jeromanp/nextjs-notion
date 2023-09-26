@@ -17,13 +17,11 @@ const RecipePage = ({ recipes }) => {
           Todas las Recetas:
         </h1>
         {recipes.map((recipe) => (
-          <p key={recipe}>
-            <Link href={`/recipes/${slugify(recipe).toLowerCase()}`}>
-              <ul>
-                <li  className="text-xl">- {recipe}</li>
-              </ul>
-            </Link>
-          </p>
+          <Link href={`/recipes/${slugify(recipe).toLowerCase()}`}>
+            <ul key={recipe}>
+              <li className="text-xl">- {recipe}</li>
+            </ul>
+          </Link>
         ))}
       </div>
     </main>
