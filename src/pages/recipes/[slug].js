@@ -5,7 +5,7 @@ import Recipes from "@/components/Recipes";
 
 const Recipe = ({ recipe }) => {
   return (
-    <div className="bg-green-900 justify-between p-24">
+    <div className="bg-green-900 justify-between p-12">
       <div className="flex items-start">
         
       <Link href={"/recipes"}>
