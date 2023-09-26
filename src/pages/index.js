@@ -13,9 +13,9 @@ export default function Home({ quote }) {
         </Link>
       </div>
       <div>
-        <Link href={"/movies"}>
+        <Link href={"/blog"}>
           <button type="" className="bg-red-600 rounded-lg p-2">
-            Datos
+            Blogs
           </button>
         </Link>
       </div>
