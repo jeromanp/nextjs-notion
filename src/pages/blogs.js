@@ -17,7 +17,9 @@ const BlogPage = ({ blogs }) => {
         {blogs.map((blog) => (
           <p key={blog}>
             <Link href={`/blogs/${slugify(blog).toLowerCase()}`}>
-              <p className="text-xl">- {blog}</p>
+              <ul>
+                <li className="text-xl">- {blog}</li>
+              </ul>
             </Link>
           </p>
         ))}
