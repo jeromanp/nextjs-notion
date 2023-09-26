@@ -2,7 +2,7 @@ import { Client } from "@notionhq/client";
 import Link from "next/link";
 import slugify from "slugify";
 
-const Blogs = ({ blogs }) => {
+const BlogPage = ({ blogs }) => {
   return (
     <div className="bg-green-900 flex flex-col items-center justify-between p-24">
       <Link href={"/"}>
@@ -51,4 +51,4 @@ export const getStaticProps = async () => {
   };
 };
 
-export default Blogs;
+export default BlogPage;
