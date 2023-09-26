@@ -13,7 +13,7 @@ export default function Home({ quote }) {
         </Link>
       </div>
       <div>
-        <Link href={"/blog"}>
+        <Link href={"/blogs"}>
           <button type="" className="bg-red-600 rounded-lg p-2">
             Blogs
           </button>
