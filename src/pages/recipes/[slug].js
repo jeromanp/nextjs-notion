@@ -4,14 +4,14 @@ import Link from "next/link";
 
 const Recipe = ({ recipe }) => {
   return (
-    <div className="container mx-auto py-5">
+    <div className="bg-green-900 flex flex-col items-center justify-between p-24">
       <Link href={"/recipes"}>
         <button type="" className="bg-red-600 p-2 rounded-lg">
           Atrás
         </button>
       </Link>
       <h1 className="text-red-800 text-3xl">Recet: {recipe.title}</h1>
-      <pre>{JSON.stringify(recipe, null, 2)}</pre>;
+      <pre className="mx-auto">{JSON.stringify(recipe, null, 2)}</pre>;
     </div>
   );
 };
