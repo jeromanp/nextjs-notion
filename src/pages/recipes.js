@@ -20,7 +20,7 @@ const RecipePage = ({ recipes }) => {
           <p key={recipe}>
             <Link href={`/recipes/${slugify(recipe).toLowerCase()}`}>
               <ul>
-                <li className="text-xl">{recipe}</li>
+                <li  className="text-xl">- {recipe}</li>
               </ul>
             </Link>
           </p>
