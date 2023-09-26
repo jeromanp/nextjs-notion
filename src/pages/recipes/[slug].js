@@ -1,17 +1,25 @@
 import { Client } from "@notionhq/client";
 import slugify from "slugify";
 import Link from "next/link";
+import Recipes from "@/components/Recipes";
 
 const Recipe = ({ recipe }) => {
   return (
-    <div className="bg-green-900 flex flex-col items-center justify-between p-24">
+    <div className="bg-green-900 justify-between p-24">
+      <div className="flex items-start">
+        
       <Link href={"/recipes"}>
         <button type="" className="bg-red-600 p-2 rounded-lg">
           Atrás
         </button>
       </Link>
-      <h1 className="text-red-800 text-3xl">Recet: {recipe.title}</h1>
-      <pre className="mx-auto">{JSON.stringify(recipe, null, 2)}</pre>;
+      </div>
+      <Recipes
+        title={recipe.title}
+        ingredients={recipe.ingredients}
+        method={recipe.method}
+      />
+      {/* <pre className="mx-auto">{JSON.stringify(recipe, null, 2)}</pre> */}
     </div>
   );
 };
