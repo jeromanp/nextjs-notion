@@ -4,20 +4,28 @@ import slugify from "slugify";
 
 const RecipePage = ({ recipes }) => {
   return (
-    <main className="bg-green-900 flex flex-col items-center justify-between p-24">
-      <Link href={"/"}>
-        <button type="" className="bg-red-600 p-2 rounded-lg">
-          Atrás
-        </button>
-      </Link>
-      <h1 className="p-24">Todas las Recetas:</h1>
-      {recipes.map((recipe) => (
-        <p key={recipe}>
-          <Link href={`/recipes/${slugify(recipe).toLowerCase()}`}>
-            <p>{recipe}</p>
-          </Link>
-        </p>
-      ))}
+    <main className="h-screen bg-green-900 justify-between p-24">
+      <div className="items start flex">
+        <Link href={"/"}>
+          <button type="" className="bg-red-600 p-2 rounded-lg">
+            Atrás
+          </button>
+        </Link>
+      </div>
+      <div className="">
+        <h1 className="p-12 text-4xl flex justify-center">
+          Todas las Recetas:
+        </h1>
+        {recipes.map((recipe) => (
+          <p key={recipe}>
+            <Link href={`/recipes/${slugify(recipe).toLowerCase()}`}>
+              <ul>
+                <li className="text-xl">{recipe}</li>
+              </ul>
+            </Link>
+          </p>
+        ))}
+      </div>
     </main>
   );
 };
