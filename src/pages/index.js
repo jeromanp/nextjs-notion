@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home({ quote }) {
   return (
-    <main className="bg-green-900 flex flex-col items-center justify-between p-24">
+    <main className="h-screen bg-green-900 flex flex-col items-center justify-between p-24">
       <h1 className="p-24">Hola mundo</h1>
       <p className="font-bold">{JSON.stringify(quote)}</p>
       <div className="py-6">
