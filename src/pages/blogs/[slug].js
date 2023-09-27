@@ -23,7 +23,7 @@ const Blog = ({ blog }) => {
         bannerImageHeight={blog.bannerImageHeight}
       />
 
-      <pre className="mx-auto">{JSON.stringify(blog, null, 2)}</pre>
+      {/* <pre className="mx-auto">{JSON.stringify(blog, null, 2)}</pre> */}
     </div>
   );
 };
