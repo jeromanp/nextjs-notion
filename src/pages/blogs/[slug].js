@@ -53,8 +53,6 @@ export const getServerSideProps = async (context) => {
     };
   }
 
-  // console.log(blog);
-
   // Obtener el contenido de la página asociada a la fila
   const pageId = blog.id; // ID de la página
   const pageContent = await notion.blocks.children.list({
@@ -65,12 +63,26 @@ export const getServerSideProps = async (context) => {
 const content = pageContent.results
   .map((block) => {
     if (block.type === "paragraph") {
-      return (block.paragraph.rich_text[0]?.text?.content || "");
+      const parra =  block.paragraph.rich_text[0]?.text?.content || "";
+      return parra + `<br/>`;
+    } else if (block.type === "heading_1") {
+      return `## ${block.heading_1.text[0]?.plain_text || ""}`;
+    } else if (block.type === "image") {
+      // Devolver la URL de la imagen en lugar de un objeto React
+      const imageUrl = block.image.external.url || "";
+      return `<img src="${imageUrl}" alt="Image" />`;
+
+    } else if (block.type === "video") {
+      // Procesar bloques de videos y mostrarlos en tu página
+      const videoUrl = block.video.external.url;
+      return <video src={videoUrl} controls />;
     }
     // Agregar más casos según los tipos de bloques que necesites manejar
     return "";
   })
-  .join("\n\n");
+  .join("");
+
+  // console.log(pageContent.results[6]);
 
   return {
     props: {
