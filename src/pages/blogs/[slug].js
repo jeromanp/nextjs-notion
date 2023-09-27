@@ -9,10 +9,10 @@ const Blog = ({ blog }) => {
     <div className="bg-green-900 justify-between p-12">
       <div className="flex items-start">
         <Link href={"/blogs"}>
-        <button type="" className="bg-red-600 p-2 rounded-lg">
-          Atrás
-        </button>
-      </Link>
+          <button type="" className="bg-red-600 p-2 rounded-lg">
+            Atrás
+          </button>
+        </Link>
       </div>
       <Posts
         title={blog.title}
@@ -46,8 +46,6 @@ export const getServerSideProps = async (context) => {
     );
   });
 
-  console.log(blog);
-
   if (!blog) {
     // Manejar el caso en que no se encuentre el blog
     return {
@@ -55,15 +53,34 @@ export const getServerSideProps = async (context) => {
     };
   }
 
+  // console.log(blog);
+
+  // Obtener el contenido de la página asociada a la fila
+  const pageId = blog.id; // ID de la página
+  const pageContent = await notion.blocks.children.list({
+    block_id: pageId,
+  });
+
+// Mapear todos los bloques en pageContent.results
+const content = pageContent.results
+  .map((block) => {
+    if (block.type === "paragraph") {
+      return (block.paragraph.rich_text[0]?.text?.content || "");
+    }
+    // Agregar más casos según los tipos de bloques que necesites manejar
+    return "";
+  })
+  .join("\n\n");
+
   return {
     props: {
       blog: {
         title: blog.properties.Title.title[0]?.text?.content || "",
-        description: blog.properties.Description.multi_select[0].name,
-        content: blog.properties.Content?.rich_text[0]?.text?.content || "",
-        // bannerImage: blog.properties.BannerImage.files[0].name || "",
-        bannerImageWidth: blog.properties.BannerImageWidth.number || 0,
-        bannerImageHeight: blog.properties.BannerImageHeigth.number || 0,
+        description: blog.properties.Description.multi_select[0]?.name,
+        content: content,
+        bannerImage: blog.properties.BannerImage.files[0]?.name || "",
+        bannerImageWidth: blog.properties.BannerImageWidth?.number || 0,
+        bannerImageHeight: blog.properties.BannerImageHeight?.number || 0,
       },
     },
   };
