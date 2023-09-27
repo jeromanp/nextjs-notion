@@ -1,17 +1,18 @@
 import Image from "next/image";
 
 export default function Posts(props) {
-  const { title, content, bannerImage, bannerImageWidth, bannerImageHeight } =
+  const { title, description, content, bannerImage, bannerImageWidth, bannerImageHeight } =
     props;
 
   return (
     <article className="w-full mb-10 flex flex-col items-center pt-20">
       <h1 className="text-6xl font-black text-white mb-8">{title}</h1>
+      <p>{description}</p>
       <Image
         alt="Blog Image"
         src={bannerImage}
         // width={bannerImageWidth}
-        width={800}
+        width={bannerImageWidth}
         height={bannerImageHeight}
         className="[width: 800px]!"
       />
