@@ -45,25 +45,24 @@ const BlogPage = ({ blogs }) => {
             </div>
           </div>
           {/* Items */}
-
-          {blogs.map((blog) => (
-            <div className="flex flex-wrap -mx-4" key={blog.title}>
-              {" "}
-              {/* Añadir un key único para cada blog */}
-              <div className="w-full md:w-1/2 lg:w-1/3 px-4">
-                <div className="max-w-[370px] mx-auto mb-10 px-4">
-                  <div className="rounded overflow-hidden mb-8">
-                    <img
-                      src={blog.imageBlog}
-                      alt={blog.title}
-                      className="w-96 h-auto"
-                    />
-                  </div>
-                  <div>
-                    <span
-                      className="
+          <div className="grid grid-cols-1 gap-12 text-center sm:grid-cols-2 md:grid-cols-3 lg:gap-y-16">
+            {blogs.map((blog) => (
+              <div className=" -mx-4" key={blog.title}>
+                {" "}
+                <div className="">
+                  <div className="max-w-[370px] mx-auto mb-10 px-4">
+                    <div className="rounded overflow-hidden mb-8">
+                      <img
+                        src={blog.imageBlog}
+                        alt={blog.title}
+                        className="w-96 h-48 object-cover"
+                      />
+                    </div>
+                    <div>
+                      <span
+                        className="
                       bg-blue-900
-                      rounded
+                      rounded-md
                       inline-block
                       text-center
                       py-1
@@ -71,17 +70,19 @@ const BlogPage = ({ blogs }) => {
                       text-xs
                       leading-loose
                       font-semibold
-                      text-white
+                      text-blue-500
                       mb-5
             "
-                    >
-                      {blog.datePublic}
-                    </span>
-                    <Link href={`/blogs/${slugify(blog.title).toLowerCase()}`}>
-                      <h3>
-                        <a
-                          href="javascript:void(0)"
-                          className="
+                      >
+                        {blog.datePublic}
+                      </span>
+                      <Link
+                        href={`/blogs/${slugify(blog.title).toLowerCase()}`}
+                      >
+                        <h3>
+                          <a
+                            href="javascript:void(0)"
+                            className="
               font-semibold
               text-xl
               sm:text-2xl
@@ -92,19 +93,20 @@ const BlogPage = ({ blogs }) => {
               text-dark
               hover:text-blue-500
               "
-                        >
-                          {blog.title}
-                        </a>
-                      </h3>
-                    </Link>
-                    <p className="text-base text-body-color">
-                      {blog.description}
-                    </p>
+                          >
+                            {blog.title}
+                          </a>
+                        </h3>
+                      </Link>
+                      <p className="text-base text-body-color">
+                        {blog.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
