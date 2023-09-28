@@ -5,7 +5,7 @@ import slugify from "slugify";
 const BlogPage = ({ blogs }) => {
   // console.log(blogs);
   return (
-    <div className="h-screen bg-teal-900 justify-between p-24">
+    <div className="h-screen bg-teal-900 justify-between p-12">
       <div className="items start flex">
         <Link href={"/"}>
           <button type="" className="bg-red-600 p-2 rounded-lg">
@@ -52,27 +52,30 @@ const BlogPage = ({ blogs }) => {
                 <div className="">
                   <div className="max-w-[370px] mx-auto mb-10 px-4">
                     <div className="rounded overflow-hidden mb-8">
-                      <img
-                        src={blog.imageBlog}
-                        alt={blog.title}
-                        className="w-96 h-48 object-cover"
-                      />
+                      <Link
+                        href={`/blogs/${slugify(blog.title).toLowerCase()}`}
+                      >
+                        <img
+                          src={blog.imageBlog}
+                          alt={blog.title}
+                          className="w-96 h-48 object-cover"
+                        />
+                      </Link>
                     </div>
                     <div>
                       <span
                         className="
-                      bg-blue-900
+                      bg-blue-400
                       rounded-md
                       inline-block
                       text-center
                       py-1
-                      px-4
+                      px-3
                       text-xs
                       leading-loose
                       font-semibold
-                      text-blue-500
-                      mb-5
-            "
+                      text-sky-950
+                      mb-5"
                       >
                         {blog.datePublic}
                       </span>
@@ -83,22 +86,22 @@ const BlogPage = ({ blogs }) => {
                           <a
                             href="javascript:void(0)"
                             className="
-              font-semibold
+              font-bold
               text-xl
-              sm:text-2xl
-              lg:text-xl
-              xl:text-2xl
+              sm:text-3xl
+              lg:text-3xl
               mb-4
               inline-block
               text-dark
               hover:text-blue-500
+              text-lime-500
               "
                           >
                             {blog.title}
                           </a>
                         </h3>
                       </Link>
-                      <p className="text-base text-body-color">
+                      <p className="text-base text-stone-200 mx-1">
                         {blog.description}
                       </p>
                     </div>
