@@ -1,6 +1,5 @@
 // pages/blogs/[slug].js
 import { Client } from "@notionhq/client";
-import { useRouter } from "next/router";
 import Posts from "../../components/Posts";
 import Link from "next/link";
 
@@ -47,19 +46,18 @@ export const getServerSideProps = async (context) => {
   });
 
   if (!blog) {
-    // Manejar el caso en que no se encuentre el blog
     return {
       notFound: true,
     };
   }
 
   // Obtener el contenido de la página asociada a la fila
-  const pageId = blog.id; // ID de la página
+  const pageId = blog.id;
   const pageContent = await notion.blocks.children.list({
     block_id: pageId,
   });
 
-  console.log(pageContent.results[23].toggle);
+  // console.log(pageContent.results[23].toggle);
   let i = 1;
   // Mapear todos los bloques en pageContent.results
   const content = pageContent.results
@@ -79,7 +77,6 @@ export const getServerSideProps = async (context) => {
         const checkbox = block.to_do?.checked ? "[x]" : "[ ]";
         return `${checkbox} ${block.to_do?.rich_text[0]?.plain_text}` + `<br/>`;
       } else if (block.type === "image") {
-        // Devolver la URL de la imagen en lugar de un objeto React
         const imageUrl = block.image.external.url || "";
         return `<img src="${imageUrl}" alt="Image" />` + `<br/>`;
       } else if (block.type === "bulleted_list_item") {
@@ -95,30 +92,26 @@ export const getServerSideProps = async (context) => {
 
       // else if (block.type === "toggle") {
       //   // Obtener el texto del bloque de tipo toggle
-      //   const toggleText = block.toggle?.rich_text[0]?.text.content| "";        
+      //   const toggleText = block.toggle?.rich_text[0]?.text.content| "";
       //   // Crear una estructura HTML para representar el bloque de tipo toggle
       //   const toggleHtml = `
       //     <details>
       //       <summary>${toggleText}</summary>
       //       <div>${block.toggle?.children.map(child => child.rich_text[0]?.text?.content).join("<br/>")}</div>
       //     </details>
-      //   `;        
+      //   `;
       //   return toggleHtml;
       // }
-      
 
       //
       else if (block.type === "video") {
-        // Procesar bloques de videos y mostrarlos en tu página
         const videoUrl = block.video.external.url || "";
-        // console.log(videoUrl);
         return (
           `<video src="${videoUrl}" controls width="640" height="360" preload="auto" />` +
           `<br/>`
         );
       }
 
-      // Agregar más casos según los tipos de bloques que necesites manejar
       return "";
     })
     .join("");
