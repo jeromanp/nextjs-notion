@@ -59,30 +59,69 @@ export const getServerSideProps = async (context) => {
     block_id: pageId,
   });
 
-// Mapear todos los bloques en pageContent.results
-const content = pageContent.results
-  .map((block) => {
-    if (block.type === "paragraph") {
-      const parra =  block.paragraph.rich_text[0]?.text?.content || "";
-      return parra + `<br/>`;
-    } else if (block.type === "heading_1") {
-      return `## ${block.heading_1.text[0]?.plain_text || ""}`;
-    } else if (block.type === "image") {
-      // Devolver la URL de la imagen en lugar de un objeto React
-      const imageUrl = block.image.external.url || "";
-      return `<img src="${imageUrl}" alt="Image" />`;
+  console.log(pageContent.results[23].toggle);
+  let i = 1;
+  // Mapear todos los bloques en pageContent.results
+  const content = pageContent.results
+    .map((block) => {
+      if (block.type === "paragraph") {
+        const parra = block.paragraph.rich_text[0]?.text?.content || "";
+        return parra + `<br/>`;
+      } else if (block.type === "heading_1") {
+        return ` ${block.heading_1.rich_text[0]?.text.content || ""}` + `<br/>`;
+      } else if (block.type === "heading_2") {
+        return ` ${block.heading_2.rich_text[0]?.text.content || ""}` + `<br/>`;
+      } else if (block.type === "heading_3") {
+        return ` ${block.heading_3.rich_text[0]?.text.content || ""}` + `<br/>`;
+      } else if (block.type === "quote") {
+        return `> ${block.quote?.rich_text?.[0]?.text.content}` + `<br/>`;
+      } else if (block.type === "to_do") {
+        const checkbox = block.to_do?.checked ? "[x]" : "[ ]";
+        return `${checkbox} ${block.to_do?.rich_text[0]?.plain_text}` + `<br/>`;
+      } else if (block.type === "image") {
+        // Devolver la URL de la imagen en lugar de un objeto React
+        const imageUrl = block.image.external.url || "";
+        return `<img src="${imageUrl}" alt="Image" />` + `<br/>`;
+      } else if (block.type === "bulleted_list_item") {
+        return (
+          `- ${block.bulleted_list_item?.rich_text[0]?.text.content}` + `<br/>`
+        );
+      } else if (block.type === "numbered_list_item") {
+        const numberedItem =
+          `${i++}. ${block.numbered_list_item?.rich_text[0]?.text.content}` +
+          `<br/>`;
+        return numberedItem;
+      }
 
-    } else if (block.type === "video") {
-      // Procesar bloques de videos y mostrarlos en tu página
-      const videoUrl = block.video.external.url;
-      return <video src={videoUrl} controls />;
-    }
-    // Agregar más casos según los tipos de bloques que necesites manejar
-    return "";
-  })
-  .join("");
+      // else if (block.type === "toggle") {
+      //   // Obtener el texto del bloque de tipo toggle
+      //   const toggleText = block.toggle?.rich_text[0]?.text.content| "";        
+      //   // Crear una estructura HTML para representar el bloque de tipo toggle
+      //   const toggleHtml = `
+      //     <details>
+      //       <summary>${toggleText}</summary>
+      //       <div>${block.toggle?.children.map(child => child.rich_text[0]?.text?.content).join("<br/>")}</div>
+      //     </details>
+      //   `;        
+      //   return toggleHtml;
+      // }
+      
 
-  // console.log(pageContent.results[6]);
+      //
+      else if (block.type === "video") {
+        // Procesar bloques de videos y mostrarlos en tu página
+        const videoUrl = block.video.external.url || "";
+        // console.log(videoUrl);
+        return (
+          `<video src="${videoUrl}" controls width="640" height="360" preload="auto" />` +
+          `<br/>`
+        );
+      }
+
+      // Agregar más casos según los tipos de bloques que necesites manejar
+      return "";
+    })
+    .join("");
 
   return {
     props: {
