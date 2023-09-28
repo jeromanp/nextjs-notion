@@ -42,12 +42,14 @@ export const getStaticProps = async () => {
   data.results.forEach((result) => {
     if (
       result.parent.type === "database_id" &&
-      result.properties.Title.title[0]
+      result.properties.Status.status.name === "Done"
     ) {
       blogs.push(result.properties.Title.title[0].text.content);
       // console.log("BLOGS======>>>", result.properties);
     }
   });
+
+  console.log("DATTTTTTA",data.results[0].properties.Status.status.name);
 
   return {
     props: {
