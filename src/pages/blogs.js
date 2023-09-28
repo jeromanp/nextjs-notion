@@ -3,8 +3,9 @@ import Link from "next/link";
 import slugify from "slugify";
 
 const BlogPage = ({ blogs }) => {
+  // console.log(blogs);
   return (
-    <div className="h-screen bg-green-900 justify-between p-24">
+    <div className="h-screen bg-teal-900 justify-between p-24">
       <div className="items start flex">
         <Link href={"/"}>
           <button type="" className="bg-red-600 p-2 rounded-lg">
@@ -12,18 +13,102 @@ const BlogPage = ({ blogs }) => {
           </button>
         </Link>
       </div>
-      <div>
-        <h1 className="p-12 text-4xl flex justify-center">Nuestros Blogs:</h1>
-        {blogs.map((blog) => (
-          <Link href={`/blogs/${slugify(blog).toLowerCase()}`}>
-            <ul key={blog}>
-              <li className="text-xl">- {blog}</li>
-            </ul>
-          </Link>
-        ))}
-      </div>
 
-      {/* <pre className="mx-auto">{JSON.stringify(blogs, null, 2)}</pre> */}
+      {/* <!-- ====== Blog Section Start --> */}
+      <section className="bg-sky-900 pt-20 lg:pt-[120px] pb-10 lg:pb-20">
+        <div className="container">
+          <div className="flex flex-wrap justify-center -mx-4">
+            <div className="w-full px-4">
+              <div className="text-center mx-auto mb-[60px] lg:mb-20 max-w-[510px]">
+                <span className="font-semibold text-lg text-white mb-2 block">
+                  Nuestros Blogs
+                </span>
+                <h2
+                  className="
+                  font-bold
+                  text-2xl
+                  sm:text-3xl
+                  md:text-[40px]
+                  text-dark
+                  mb-4
+                  "
+                >
+                  Visita Nuestro Contenido Reciente
+                </h2>
+                <p className="text-base text-gray-400">
+                  ellentesque ipsum erat, molestie nec sodales eget, feugiat ac
+                  augue. Integer semper eget tortor et luctus. Nunc bibendum
+                  turpis ut enim condimentum vestibulum. Nullam a metus
+                  consectetur, elementum sapien bibendum, interdum orci.
+                </p>
+              </div>
+            </div>
+          </div>
+          {/* Items */}
+
+          {blogs.map((blog) => (
+            <div className="flex flex-wrap -mx-4" key={blog.title}>
+              {" "}
+              {/* Añadir un key único para cada blog */}
+              <div className="w-full md:w-1/2 lg:w-1/3 px-4">
+                <div className="max-w-[370px] mx-auto mb-10 px-4">
+                  <div className="rounded overflow-hidden mb-8">
+                    <img
+                      src={blog.imageBlog}
+                      alt={blog.title}
+                      className="w-96 h-auto"
+                    />
+                  </div>
+                  <div>
+                    <span
+                      className="
+                      bg-blue-900
+                      rounded
+                      inline-block
+                      text-center
+                      py-1
+                      px-4
+                      text-xs
+                      leading-loose
+                      font-semibold
+                      text-white
+                      mb-5
+            "
+                    >
+                      {blog.datePublic}
+                    </span>
+                    <Link href={`/blogs/${slugify(blog.title).toLowerCase()}`}>
+                      <h3>
+                        <a
+                          href="javascript:void(0)"
+                          className="
+              font-semibold
+              text-xl
+              sm:text-2xl
+              lg:text-xl
+              xl:text-2xl
+              mb-4
+              inline-block
+              text-dark
+              hover:text-blue-500
+              "
+                        >
+                          {blog.title}
+                        </a>
+                      </h3>
+                    </Link>
+                    <p className="text-base text-body-color">
+                      {blog.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* <pre classNameName="mx-auto">{JSON.stringify(blogs, null, 2)}</pre> */}
     </div>
   );
 };
@@ -39,17 +124,33 @@ export const getStaticProps = async () => {
 
   const blogs = [];
 
+  // console.log("DDDDD",data.results[0].properties.BannerImage.files[0].external.url);
+
   data.results.forEach((result) => {
     if (
       result.parent.type === "database_id" &&
-      result.properties.Status.status.name === "Done"
+      result.properties.Status?.status.name === "Done"
     ) {
-      blogs.push(result.properties.Title.title[0].text.content);
-      // console.log("BLOGS======>>>", result.properties);
+      const title = result.properties.Title?.title[0]?.text.content || "";
+      const description =
+        result.properties.Description?.multi_select[0]?.name || "";
+      const datePublic = result.last_edited_time;
+      const parsedDate = new Date(datePublic);
+
+      const day = parsedDate.getDate().toString().padStart(2, "0");
+      const month = (parsedDate.getMonth() + 1).toString().padStart(2, "0");
+      const year = parsedDate.getFullYear();
+      const formattedDate = `${day}-${month}-${year}`;
+      const imageBlog = result.properties.BannerImage.files[0].external.url;
+
+      blogs.push({
+        title,
+        description,
+        datePublic: formattedDate,
+        imageBlog,
+      });
     }
   });
-
-  console.log("DATTTTTTA",data.results[0].properties.Status.status.name);
 
   return {
     props: {
