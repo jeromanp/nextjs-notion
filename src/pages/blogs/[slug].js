@@ -16,8 +16,8 @@ const Blog = ({ blog }) => {
       <Posts
         title={blog.title}
         content={blog.content}
-        bannerImage={blog.bannerImage}   
-        datePublic={blog.datePublic}     
+        bannerImage={blog.bannerImage}
+        datePublic={blog.datePublic}
       />
 
       {/* <pre className="mx-auto">{JSON.stringify(blog, null, 2)}</pre> */}
@@ -62,30 +62,39 @@ export const getServerSideProps = async (context) => {
     .map((block) => {
       if (block.type === "paragraph") {
         const parra = block.paragraph.rich_text[0]?.plain_text || "";
-        return `<p className='text-justify'>${parra}</p>`;
+        return `<div class='flex justify-start'>
+        <p class='text-lg mb-5 justify-center'>${parra}</p>
+         </div>`;
       } else if (block.type === "heading_1") {
-        return ` ${block.heading_1.rich_text[0]?.text.content || ""}` + `<br/>`;
+        const h_1 = ` ${block.heading_1.rich_text[0]?.text.content || ""}`;
+        return `<div class='flex justify-center'>
+        <p class='text-4xl mb-5 font-bold'>${h_1}</p>
+         </div>`;
       } else if (block.type === "heading_2") {
-        return ` ${block.heading_2.rich_text[0]?.plain_text || ""}` + `<br/>`;
+        const h_2 = ` ${block.heading_2.rich_text[0]?.plain_text || ""}`;
+        return `<div class='flex justify-start'>
+        <p class='text-3xl mb-5 font-bold'>${h_2}</p>
+         </div>`;
       } else if (block.type === "heading_3") {
-        return ` ${block.heading_3.rich_text[0]?.plain_text || ""}` + `<br/>`;
+        const h_3 = ` ${block.heading_3.rich_text[0]?.plain_text || ""}`
+        return `<div class='flex justify-start'>
+        <p class='text-2xl mb-5 font-bold'>${h_3}</p>
+         </div>`;;
       } else if (block.type === "quote") {
         const result = `> ${block.quote?.rich_text?.[0]?.plain_text}` + `<br/>`;
-        // console.log(result);
-        return `<blockquote class='p-4 my-4 border-l-4 border-gray-300 bg-yellow-600'>
+        return `<blockquote class='p-4 my-4 border-l-4 border-gray-800 bg-yellow-700'>
             <p class='text-xl italic font-medium leading-relaxed text-gray-900 dark:text-white'>
               ${result}
             </p>
           </blockquote>`;
-      }
-       else if (block.type === "to_do") {
+      } else if (block.type === "to_do") {
         const checkbox = block.to_do?.checked ? "[x]" : "[ ]";
         return `${checkbox} ${block.to_do?.rich_text[0]?.plain_text}` + `<br/>`;
       } else if (block.type === "image") {
         const imageUrl = block.image.external.url || "";
         return `
         <div class='flex justify-center'>
-        <img src="${imageUrl}" alt="Image" class='h-auto w-96' /> </div>` ;
+        <img src="${imageUrl}" alt="Image" class='h-auto w-96 mb-5' /> </div>`;
       } else if (block.type === "bulleted_list_item") {
         return (
           `- ${block.bulleted_list_item?.rich_text[0]?.plain_text}` + `<br/>`
@@ -124,14 +133,14 @@ export const getServerSideProps = async (context) => {
     })
     .join("");
 
-    const datePublic = pageContent.results[0].last_edited_time;
-    // console.log(pageContent.results[0]);
-      const parsedDate = new Date(datePublic);
+  const datePublic = pageContent.results[0].last_edited_time;
+  // console.log(pageContent.results[0]);
+  const parsedDate = new Date(datePublic);
 
-      const day = parsedDate.getDate().toString().padStart(2, "0");
-      const month = (parsedDate.getMonth() + 1).toString().padStart(2, "0");
-      const year = parsedDate.getFullYear();
-      const formattedDate = `${day}-${month}-${year}`;
+  const day = parsedDate.getDate().toString().padStart(2, "0");
+  const month = (parsedDate.getMonth() + 1).toString().padStart(2, "0");
+  const year = parsedDate.getFullYear();
+  const formattedDate = `${day}-${month}-${year}`;
 
   return {
     props: {
@@ -140,7 +149,7 @@ export const getServerSideProps = async (context) => {
         description: blog.properties.Description.multi_select[0]?.name,
         content: content,
         bannerImage: blog.properties.BannerImage.files[0]?.name || "",
-        datePublic:formattedDate,
+        datePublic: formattedDate,
       },
     },
   };
