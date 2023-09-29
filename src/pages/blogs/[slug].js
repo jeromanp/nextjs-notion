@@ -15,11 +15,9 @@ const Blog = ({ blog }) => {
       </div>
       <Posts
         title={blog.title}
-        description={blog.description}
         content={blog.content}
-        bannerImage={blog.bannerImage}
-        bannerImageWidth={blog.bannerImageWidth}
-        bannerImageHeight={blog.bannerImageHeight}
+        bannerImage={blog.bannerImage}   
+        datePublic={blog.datePublic}     
       />
 
       {/* <pre className="mx-auto">{JSON.stringify(blog, null, 2)}</pre> */}
@@ -57,14 +55,14 @@ export const getServerSideProps = async (context) => {
     block_id: pageId,
   });
 
-  console.log(pageContent.results[23].toggle.rich_text[0]);
+  // console.log(pageContent.results[23].toggle.rich_text[0]);
   let i = 1;
   // Mapear todos los bloques en pageContent.results
   const content = pageContent.results
     .map((block) => {
       if (block.type === "paragraph") {
         const parra = block.paragraph.rich_text[0]?.plain_text || "";
-        return parra + `<br/>`;
+        return `<p className="text-justify">${parra}</p>`;
       } else if (block.type === "heading_1") {
         return ` ${block.heading_1.rich_text[0]?.text.content || ""}` + `<br/>`;
       } else if (block.type === "heading_2") {
@@ -122,6 +120,15 @@ export const getServerSideProps = async (context) => {
     })
     .join("");
 
+    const datePublic = pageContent.results[0].last_edited_time;
+    console.log(pageContent.results[0]);
+      const parsedDate = new Date(datePublic);
+
+      const day = parsedDate.getDate().toString().padStart(2, "0");
+      const month = (parsedDate.getMonth() + 1).toString().padStart(2, "0");
+      const year = parsedDate.getFullYear();
+      const formattedDate = `${day}-${month}-${year}`;
+
   return {
     props: {
       blog: {
@@ -129,8 +136,7 @@ export const getServerSideProps = async (context) => {
         description: blog.properties.Description.multi_select[0]?.name,
         content: content,
         bannerImage: blog.properties.BannerImage.files[0]?.name || "",
-        bannerImageWidth: blog.properties.BannerImageWidth?.number || 0,
-        bannerImageHeight: blog.properties.BannerImageHeight?.number || 0,
+        datePublic:formattedDate,
       },
     },
   };
