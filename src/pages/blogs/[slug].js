@@ -76,10 +76,10 @@ export const getServerSideProps = async (context) => {
         <p class='text-3xl mb-5 font-bold'>${h_2}</p>
          </div>`;
       } else if (block.type === "heading_3") {
-        const h_3 = ` ${block.heading_3.rich_text[0]?.plain_text || ""}`
+        const h_3 = ` ${block.heading_3.rich_text[0]?.plain_text || ""}`;
         return `<div class='flex justify-start'>
         <p class='text-2xl mb-5 font-bold'>${h_3}</p>
-         </div>`;;
+         </div>`;
       } else if (block.type === "quote") {
         const result = `> ${block.quote?.rich_text?.[0]?.plain_text}` + `<br/>`;
         return `<blockquote class='p-4 my-4 border-l-4 border-gray-800 bg-yellow-700'>
@@ -88,8 +88,26 @@ export const getServerSideProps = async (context) => {
             </p>
           </blockquote>`;
       } else if (block.type === "to_do") {
-        const checkbox = block.to_do?.checked ? "[x]" : "[ ]";
-        return `${checkbox} ${block.to_do?.rich_text[0]?.plain_text}` + `<br/>`;
+        const isChecked = block.to_do?.checked;
+        const textContent = block.to_do?.rich_text[0]?.plain_text;
+
+        if (isChecked) {
+          return `
+            <div class="flex mb-4 items-center">
+              <p class="text-lg line-through text-green"> <span class="material-symbols-outlined">
+              check_circle
+              </span>  ${textContent}</p>              
+            </div>
+          `;
+        } else {
+          return `
+            <div class="flex mb-4 items-center">
+              <p class="text-lg text-grey-darkest"> <span class="material-symbols-outlined">
+              circle
+              </span>  ${textContent}</p>              
+            </div>
+          `;
+        }
       } else if (block.type === "image") {
         const imageUrl = block.image.external.url || "";
         return `
