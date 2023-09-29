@@ -55,14 +55,14 @@ export const getServerSideProps = async (context) => {
     block_id: pageId,
   });
 
-  // console.log(pageContent.results[23].toggle.rich_text[0]);
+  // console.log(pageContent.results[10].quote.rich_text[0]);
   let i = 1;
   // Mapear todos los bloques en pageContent.results
   const content = pageContent.results
     .map((block) => {
       if (block.type === "paragraph") {
         const parra = block.paragraph.rich_text[0]?.plain_text || "";
-        return `<p className="text-justify">${parra}</p>`;
+        return `<p className='text-justify'>${parra}</p>`;
       } else if (block.type === "heading_1") {
         return ` ${block.heading_1.rich_text[0]?.text.content || ""}` + `<br/>`;
       } else if (block.type === "heading_2") {
@@ -71,17 +71,21 @@ export const getServerSideProps = async (context) => {
         return ` ${block.heading_3.rich_text[0]?.plain_text || ""}` + `<br/>`;
       } else if (block.type === "quote") {
         const result = `> ${block.quote?.rich_text?.[0]?.plain_text}` + `<br/>`;
-        return `<blockquote className="p-4 my-4 border-l-4 border-gray-300 bg-gray-50 dark:border-gray-500 dark:bg-gray-800">
-            <p className="text-xl italic font-medium leading-relaxed text-gray-900 dark:text-white">
+        // console.log(result);
+        return `<blockquote class='p-4 my-4 border-l-4 border-gray-300 bg-yellow-600'>
+            <p class='text-xl italic font-medium leading-relaxed text-gray-900 dark:text-white'>
               ${result}
             </p>
           </blockquote>`;
-      } else if (block.type === "to_do") {
+      }
+       else if (block.type === "to_do") {
         const checkbox = block.to_do?.checked ? "[x]" : "[ ]";
         return `${checkbox} ${block.to_do?.rich_text[0]?.plain_text}` + `<br/>`;
       } else if (block.type === "image") {
         const imageUrl = block.image.external.url || "";
-        return `<img src="${imageUrl}" alt="Image" />` + `<br/>`;
+        return `
+        <div class='flex justify-center'>
+        <img src="${imageUrl}" alt="Image" class='h-auto w-96' /> </div>` ;
       } else if (block.type === "bulleted_list_item") {
         return (
           `- ${block.bulleted_list_item?.rich_text[0]?.plain_text}` + `<br/>`
@@ -121,7 +125,7 @@ export const getServerSideProps = async (context) => {
     .join("");
 
     const datePublic = pageContent.results[0].last_edited_time;
-    console.log(pageContent.results[0]);
+    // console.log(pageContent.results[0]);
       const parsedDate = new Date(datePublic);
 
       const day = parsedDate.getDate().toString().padStart(2, "0");

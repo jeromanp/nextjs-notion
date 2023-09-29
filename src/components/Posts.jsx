@@ -4,7 +4,7 @@ export default function Posts(props) {
   const { title, content, bannerImage, datePublic } = props;
 
   return (
-    <article>
+    <article className="">
       <div
         class="mb-4 md:mb-0 w-full max-w-screen-md mx-auto relative"
         style={{ height: "24em" }}
