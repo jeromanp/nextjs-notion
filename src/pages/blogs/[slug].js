@@ -94,7 +94,7 @@ export const getServerSideProps = async (context) => {
         if (isChecked) {
           return `
             <div class="flex mb-4 items-center">
-              <p class="text-lg line-through text-green"> <span class="material-symbols-outlined">
+              <p class="text-lg line-through text-green"> <span class="material-symbols-outlined text-green-600">
               check_circle
               </span>  ${textContent}</p>              
             </div>
@@ -102,7 +102,7 @@ export const getServerSideProps = async (context) => {
         } else {
           return `
             <div class="flex mb-4 items-center">
-              <p class="text-lg text-grey-darkest"> <span class="material-symbols-outlined">
+              <p class="text-lg text-grey-darkest text-gray-400"> <span class="material-symbols-outlined text-red-600">
               circle
               </span>  ${textContent}</p>              
             </div>
@@ -114,14 +114,28 @@ export const getServerSideProps = async (context) => {
         <div class='flex justify-center'>
         <img src="${imageUrl}" alt="Image" class='h-auto w-96 mb-5' /> </div>`;
       } else if (block.type === "bulleted_list_item") {
-        return (
-          `- ${block.bulleted_list_item?.rich_text[0]?.plain_text}` + `<br/>`
-        );
+        const list = 
+          `${block.bulleted_list_item?.rich_text[0]?.plain_text}`;
+          return(
+            `<ul class="max-w-md space-y-1 text-gray-700 list-disc list-inside dark:text-gray-400">
+            <li>
+                ${list}
+            </li>
+           
+        </ul>`
+          )
       } else if (block.type === "numbered_list_item") {
         const numberedItem =
-          `${i++}. ${block.numbered_list_item?.rich_text[0]?.plain_text}` +
+          `${block.numbered_list_item?.rich_text[0]?.plain_text}` +
           `<br/>`;
-        return numberedItem;
+        return (
+          `<ol class="pl-5 mt-2 space-y-1 list-decimal list-inside text-gray-400">
+          <li>
+              ${numberedItem}
+          </li>
+         
+      </ol>`
+        );
       }
 
       // else if (block.type === "toggle") {
