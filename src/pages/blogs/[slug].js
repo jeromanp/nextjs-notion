@@ -149,7 +149,7 @@ export const getServerSideProps = async (context) => {
         // const toggleDescription =
       } else if (block.type === "video") {
         const videoUrl = block.video?.external.url || "";
-        console.log(videoUrl);
+        // console.log(videoUrl);
         return (
           `<video class="w-full pb-10 pl-4" controls>
           <source src="${videoUrl}" type="video/mp4" />
