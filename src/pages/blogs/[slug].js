@@ -114,28 +114,22 @@ export const getServerSideProps = async (context) => {
         <div class='flex justify-center'>
         <img src="${imageUrl}" alt="Image" class='h-auto w-96 mb-5' /> </div>`;
       } else if (block.type === "bulleted_list_item") {
-        const list = 
-          `${block.bulleted_list_item?.rich_text[0]?.plain_text}`;
-          return(
-            `<ul class="max-w-md space-y-1 text-gray-700 list-disc list-inside dark:text-gray-400">
+        const list = `${block.bulleted_list_item?.rich_text[0]?.plain_text}`;
+        return `<ul class="max-w-md space-y-1 text-gray-700 list-disc list-inside dark:text-gray-400">
             <li>
                 ${list}
             </li>
            
-        </ul>`
-          )
+        </ul>`;
       } else if (block.type === "numbered_list_item") {
         const numberedItem =
-          `${block.numbered_list_item?.rich_text[0]?.plain_text}` +
-          `<br/>`;
-        return (
-          `<ol class="pl-5 mt-2 space-y-1 list-decimal list-inside text-gray-400">
+          `${block.numbered_list_item?.rich_text[0]?.plain_text}` + `<br/>`;
+        return `<ol class="pl-5 mt-2 space-y-1 list-decimal list-inside text-gray-400">
           <li>
               ${numberedItem}
           </li>
          
-      </ol>`
-        );
+      </ol>`;
       }
 
       // else if (block.type === "toggle") {
@@ -154,10 +148,13 @@ export const getServerSideProps = async (context) => {
         const toggleTitle = block.toggle?.rich_text[0]?.plain_text;
         // const toggleDescription =
       } else if (block.type === "video") {
-        const videoUrl = block.video.external.url || "";
+        const videoUrl = block.video?.external.url || "";
+        console.log(videoUrl);
         return (
-          `<video src="${videoUrl}" controls width="640" height="360" preload="auto" />` +
-          `<br/>`
+          `<video class="w-full pb-10 pl-4" controls>
+          <source src="${videoUrl}" type="video/mp4" />
+          Tu navegador no soporta el elemento de video.
+        </video>`
         );
       }
 
