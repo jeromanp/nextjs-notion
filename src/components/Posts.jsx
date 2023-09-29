@@ -37,12 +37,10 @@ export default function Posts(props) {
         </div>
       </div>
       <div class="px-4 lg:px-0 mt-12 text-gray-700 max-w-screen-md mx-auto text-lg leading-relaxed">
-        <p class="pb-6">
-          <div
-            className="text-xl text-white mt-4 max-w-3xl leading-10 prose prose-p:text-white prose-headings:text-white text-justify"
-            dangerouslySetInnerHTML={{ __html: content }}
-          ></div>
-        </p>
+        <div
+          className="text-xl text-white mt-4 max-w-3xl leading-10 prose prose-p:text-white prose-headings:text-white text-justify"
+          dangerouslySetInnerHTML={{ __html: content }}
+        ></div>
       </div>
     </article>
   );
