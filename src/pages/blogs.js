@@ -79,14 +79,12 @@ const BlogPage = ({ blogs }) => {
                       >
                         {blog.datePublic}
                       </span>
-                      <Link
-                        href={`/blogs/${slugify(blog.title).toLowerCase()}`}
-                      >
-                        <h3>
-                          <a
-                            href="javascript:void(0)"
-                            className="
-              font-bold
+                      <div>
+                        <Link
+                          href={`/blogs/${slugify(blog.title).toLowerCase()}`}
+                        >
+                          <h3
+                            className="font-bold
               text-xl
               sm:text-3xl
               lg:text-3xl
@@ -94,13 +92,13 @@ const BlogPage = ({ blogs }) => {
               inline-block
               text-dark
               hover:text-blue-500
-              text-lime-500
-              "
+              text-lime-500"
                           >
                             {blog.title}
-                          </a>
-                        </h3>
-                      </Link>
+                          </h3>
+                        </Link>
+                      </div>
+
                       <p className="text-base text-stone-200 mx-1">
                         {blog.description}
                       </p>
