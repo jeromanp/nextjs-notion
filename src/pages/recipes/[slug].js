@@ -157,7 +157,7 @@ export const getStaticProps = async ({ params: { slug } }) => {
         </video>`;
       }
     })
-    .join("");
+    .filter(Boolean);
 
   // console.log(res);
 
