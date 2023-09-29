@@ -9,7 +9,7 @@ export default function Recipes(props) {
       <h1 className="text-6xl font-black text-white mb-5">{title}</h1>
       <div className="text-xl mt-4">
         <div
-          className="text-xl mt-4 max-w-3xl leading-10 prose prose-p:text-white prose-headings:text-white"
+          className="text-xl mt-4 max-w-3xl leading-10 prose prose-p:text-white prose-headings:text-white text-justify"
           dangerouslySetInnerHTML={{ __html: contentWithoutCommas }}
         ></div>
       </div>
