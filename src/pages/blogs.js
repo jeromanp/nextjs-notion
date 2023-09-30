@@ -3,7 +3,7 @@ import Link from "next/link";
 import slugify from "slugify";
 
 const BlogPage = ({ blogs }) => {
-  console.log(blogs);
+  // console.log(blogs);
   return (
     <div className="h-screen bg-teal-900 justify-between p-12">
       <div className="items start flex">
