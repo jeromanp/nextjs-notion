@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 export default function Posts(props) {
-  const { title, content, bannerImage, datePublic } = props;
+  const { title, content, bannerImage, datePublic, author, imageProfile } = props;
 
   return (
     <article className="">
@@ -24,13 +24,13 @@ export default function Posts(props) {
           <div class="flex mt-3">
             {/* Image profiule author */}
             <img
-              src="https://randomuser.me/api/portraits/men/97.jpg"
+              src={imageProfile}
               class="h-10 w-10 rounded-full mr-2 object-cover"
             />
             {/* Image profiule author */}
 
             <div>
-              <p class="font-semibold text-gray-200 text-sm"> Mike Sullivan </p>
+              <p class="font-semibold text-gray-200 text-sm"> {author} </p>
               <p class="font-semibold text-gray-400 text-xs"> {datePublic} </p>
             </div>
           </div>

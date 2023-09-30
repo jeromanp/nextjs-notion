@@ -18,6 +18,8 @@ const Blog = ({ blog }) => {
         content={blog.content}
         bannerImage={blog.bannerImage}
         datePublic={blog.datePublic}
+        author={blog.author}
+        imageProfile={blog.imageProfile}
       />
 
       {/* <pre className="mx-auto">{JSON.stringify(blog, null, 2)}</pre> */}
@@ -184,7 +186,7 @@ export const getServerSideProps = async (context) => {
     })
     .join("");
 
-  console.log(pageContent.results[16].code.language);
+  // console.log(pageContent.results[16]);
 
   const datePublic = pageContent.results[0].last_edited_time;
   // console.log(pageContent.results[0]);
@@ -195,6 +197,18 @@ export const getServerSideProps = async (context) => {
   const year = parsedDate.getFullYear();
   const formattedDate = `${day}-${month}-${year}`;
 
+  const dataAuthor = await notion.users.list({
+    block_id:process.env.PAGE_ID
+  })
+
+  const author = dataAuthor.results[0]?.name;
+  // console.log(author);
+
+  const imageProfile = dataAuthor.results[0].avatar_url
+  // console.log(imageProfile);
+
+  // console.log(dataAuthor.results[0].name);
+
   return {
     props: {
       blog: {
@@ -203,6 +217,8 @@ export const getServerSideProps = async (context) => {
         content: content,
         bannerImage: blog.properties.BannerImage.files[0]?.name || "",
         datePublic: formattedDate,
+        author,
+        imageProfile,
       },
     },
   };
