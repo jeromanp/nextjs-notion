@@ -116,7 +116,53 @@ const BlogPage = ({ blogs }) => {
   );
 };
 
-export const getStaticProps = async () => {
+// export const getStaticProps = async () => {
+//   const notion = new Client({
+//     auth: process.env.NOTION_SECRET,
+//   });
+
+//   const data = await notion.databases.query({
+//     database_id: process.env.DATABASE_ID,
+//   });
+
+//   const blogs = [];
+
+//   // console.log("DDDDD",data.results[0].properties.BannerImage.files[0].external.url);
+
+//   data.results.forEach((result) => {
+//     if (
+//       result.parent.type === "database_id" &&
+//       result.properties.Status?.status.name === "Done"
+//     ) {
+//       const title = result.properties.Title?.title[0]?.text.content || "";
+//       const description =
+//         result.properties.Description?.multi_select[0]?.name || "";
+//       const datePublic = result.last_edited_time;
+//       const parsedDate = new Date(datePublic);
+
+//       const day = parsedDate.getDate().toString().padStart(2, "0");
+//       const month = (parsedDate.getMonth() + 1).toString().padStart(2, "0");
+//       const year = parsedDate.getFullYear();
+//       const formattedDate = `${day}-${month}-${year}`;
+//       const imageBlog = result.properties.BannerImage.files[0].external.url;
+
+//       blogs.push({
+//         title,
+//         description,
+//         datePublic: formattedDate,
+//         imageBlog,
+//       });
+//     }
+//   });
+
+//   return {
+//     props: {
+//       blogs,
+//     },
+//   };
+// };
+
+export const getServerSideProps = async () => {
   const notion = new Client({
     auth: process.env.NOTION_SECRET,
   });
@@ -126,8 +172,6 @@ export const getStaticProps = async () => {
   });
 
   const blogs = [];
-
-  // console.log("DDDDD",data.results[0].properties.BannerImage.files[0].external.url);
 
   data.results.forEach((result) => {
     if (
