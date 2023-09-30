@@ -63,28 +63,28 @@ export const getServerSideProps = async (context) => {
     .map((block) => {
       if (block.type === "paragraph") {
         const parra = block.paragraph.rich_text[0]?.plain_text || "";
-        return `<div class='flex justify-start'>
-        <p class='text-lg mb-5 justify-center'>${parra}</p>
+        return `<div className='flex justify-start'>
+        <p className='text-lg mb-5 justify-center'>${parra}</p>
          </div>`;
       } else if (block.type === "heading_1") {
         const h_1 = ` ${block.heading_1.rich_text[0]?.text.content || ""}`;
-        return `<div class='flex justify-center'>
-        <p class='text-4xl mb-5 font-bold'>${h_1}</p>
+        return `<div className='flex justify-center'>
+        <p className='text-4xl mb-5 font-bold'>${h_1}</p>
          </div>`;
       } else if (block.type === "heading_2") {
         const h_2 = ` ${block.heading_2.rich_text[0]?.plain_text || ""}`;
-        return `<div class='flex justify-start'>
-        <p class='text-3xl mb-5 font-bold'>${h_2}</p>
+        return `<div className='flex justify-start'>
+        <p className='text-3xl mb-5 font-bold'>${h_2}</p>
          </div>`;
       } else if (block.type === "heading_3") {
         const h_3 = ` ${block.heading_3.rich_text[0]?.plain_text || ""}`;
-        return `<div class='flex justify-start'>
-        <p class='text-2xl mb-5 font-bold'>${h_3}</p>
+        return `<div className='flex justify-start'>
+        <p className='text-2xl mb-5 font-bold'>${h_3}</p>
          </div>`;
       } else if (block.type === "quote") {
         const result = `> ${block.quote?.rich_text?.[0]?.plain_text}` + `<br/>`;
-        return `<blockquote class='p-4 my-4 border-l-4 border-gray-800 bg-yellow-700'>
-            <p class='text-xl italic font-medium leading-relaxed text-gray-900 dark:text-white'>
+        return `<blockquote className='p-4 my-4 border-l-4 border-gray-800 bg-yellow-700'>
+            <p className='text-xl italic font-medium leading-relaxed text-gray-900 dark:text-white'>
               ${result}
             </p>
           </blockquote>`;
@@ -94,16 +94,16 @@ export const getServerSideProps = async (context) => {
 
         if (isChecked) {
           return `
-            <div class="flex mb-4 items-center">
-              <p class="text-lg line-through text-green"> <span class="material-symbols-outlined text-green-600">
+            <div className="flex mb-4 items-center">
+              <p className="text-lg line-through text-green"> <span className="material-symbols-outlined text-green-600">
               check_circle
               </span>  ${textContent}</p>              
             </div>
           `;
         } else {
           return `
-            <div class="flex mb-4 items-center">
-              <p class="text-lg text-grey-darkest text-gray-400"> <span class="material-symbols-outlined text-red-600">
+            <div className="flex mb-4 items-center">
+              <p className="text-lg text-grey-darkest text-gray-400"> <span className="material-symbols-outlined text-red-600">
               circle
               </span>  ${textContent}</p>              
             </div>
@@ -112,11 +112,11 @@ export const getServerSideProps = async (context) => {
       } else if (block.type === "image") {
         const imageUrl = block.image.external.url || "";
         return `
-        <div class='flex justify-center'>
-        <img src="${imageUrl}" alt="Image" class='h-auto w-96 mb-5' /> </div>`;
+        <div className='flex justify-center'>
+        <img src="${imageUrl}" alt="Image" className='h-auto w-96 mb-5' /> </div>`;
       } else if (block.type === "bulleted_list_item") {
         const list = `${block.bulleted_list_item?.rich_text[0]?.plain_text}`;
-        return `<ul class="max-w-md space-y-1 text-gray-700 list-disc list-inside dark:text-gray-400">
+        return `<ul className="max-w-md space-y-1 text-gray-700 list-disc list-inside dark:text-gray-400">
             <li>
                 ${list}
             </li>
@@ -125,7 +125,7 @@ export const getServerSideProps = async (context) => {
       } else if (block.type === "numbered_list_item") {
         const numberedItem =
           `${block.numbered_list_item?.rich_text[0]?.plain_text}` + `<br/>`;
-        return `<ol class="pl-5 mt-2 space-y-1 list-decimal list-inside text-gray-400">
+        return `<ol className="pl-5 mt-2 space-y-1 list-decimal list-inside text-gray-400">
           <li>
               ${numberedItem}
           </li>
@@ -151,34 +151,33 @@ export const getServerSideProps = async (context) => {
       } else if (block.type === "video") {
         const videoUrl = block.video?.external.url || "";
         // console.log(videoUrl);
-        return `<video class="w-full pb-10 pl-4" controls>
-          <source src="${videoUrl}" type="video/mp4" />
-          Tu navegador no soporta el elemento de video.
+        return `<video src=${videoUrl} controls loop autoplay className="w-full pb-10 pl-4" >
+          
         </video>`;
       } else if (block.type === "bookmark") {
         const url = block.bookmark.url;
-        return `<div class="my-3">
-          <a href=${url} target="_blank" class="text-lg"><h1>${url}</h1></a>   
+        return `<div className="my-3">
+          <a href=${url} target="_blank" className="text-lg"><h1>${url}</h1></a>   
           </div>`;
       } else if (block.type === "divider") {
-        return `<hr class="my-5"/>`;
+        return `<hr className="my-5"/>`;
       } else if (block.type == "callout") {
         const res = block.callout.rich_text[0].plain_text;
         const icon = block.callout.icon.emoji;
-        return `<div class="mx-5 bg-slate-400 bg-opacity-70 pb-3">
-            <p class="text-justify text-lg mx-3 pb-3">${icon + " " + res}</p>
+        return `<div className="mx-5 bg-slate-400 bg-opacity-70 pb-3">
+            <p className="text-justify text-lg mx-3 pb-3">${icon + " " + res}</p>
           </div>`;
       } else if (block.type === "file") {
         const url = block.file.external.url;
-        return `<a href=${url} target="_blank" class="text-lg pb-3">Ver archivo adjunto : <span class="material-symbols-outlined">
+        return `<a href=${url} target="_blank" className="text-lg pb-3">Ver archivo adjunto : <span className="material-symbols-outlined">
           attach_file
           </span></a>`;
       } else if (block.type === "code") {
         const code = block.code.rich_text[0].plain_text;
         const language = block.code.language;
-        return `<div class="bg-gray-800 px-7 py-7 text-sm mb-3 ">
-        <h3 class="text-xl text-yellow-900 my-2">${language}:</h3>
-            <pre class="text-gray-500"><p >${code}</p></pre>
+        return `<div className="bg-gray-800 px-7 py-7 text-sm mb-3 ">
+        <h3 className="text-xl text-yellow-900 my-2">${language}:</h3>
+            <pre className="text-gray-500"><p >${code}</p></pre>
           </div>`;
       }
 
