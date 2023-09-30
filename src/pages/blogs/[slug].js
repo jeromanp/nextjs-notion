@@ -5,10 +5,10 @@ import Link from "next/link";
 
 const Blog = ({ blog }) => {
   return (
-    <div className="bg-green-900 justify-between p-12">
-      <div className="flex items-start">
+    <div class="bg-green-900 justify-between p-12">
+      <div class="flex items-start">
         <Link href={"/blogs"}>
-          <button type="" className="bg-red-600 p-2 rounded-lg">
+          <button type="" class="bg-red-600 p-2 rounded-lg">
             Atrás
           </button>
         </Link>
@@ -22,7 +22,7 @@ const Blog = ({ blog }) => {
         imageProfile={blog.imageProfile}
       />
 
-      {/* <pre className="mx-auto">{JSON.stringify(blog, null, 2)}</pre> */}
+      {/* <pre class="mx-auto">{JSON.stringify(blog, null, 2)}</pre> */}
     </div>
   );
 };
@@ -151,10 +151,10 @@ export const getServerSideProps = async (context) => {
       } else if (block.type === "video") {
         const videoUrl = block.video?.external.url || "";
         // console.log(videoUrl);
-        return `<video class="w-full pb-10 pl-4" controls>
-          <source src="${videoUrl}" type="video/mp4" />
-          Tu navegador no soporta el elemento de video.
-        </video>`;
+        return (`
+        <div class='flex justify-center'><video src="${videoUrl}" controls loop autoplay class="w-full pb-10 pl-4" >
+          
+        </video></div>`);
       } else if (block.type === "bookmark") {
         const url = block.bookmark.url;
         return `<div class="my-3">
