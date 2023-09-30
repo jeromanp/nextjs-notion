@@ -155,6 +155,41 @@ export const getStaticProps = async ({ params: { slug } }) => {
           <source src="${videoUrl}" type="video/mp4" />
           Tu navegador no soporta el elemento de video.
         </video>`;
+      } else if (block.type === "toogle") {
+        const toggleTitle = block.toggle?.rich_text[0]?.plain_text;
+        // const toggleDescription =
+      } else if (block.type === "video") {
+        const videoUrl = block.video?.external.url || "";
+        // console.log(videoUrl);
+        return `<video class="w-full pb-10 pl-4" controls>
+          <source src="${videoUrl}" type="video/mp4" />
+          Tu navegador no soporta el elemento de video.
+        </video>`;
+      } else if (block.type === "bookmark") {
+        const url = block.bookmark.url;
+        return `<div class="my-3">
+          <a href=${url} target="_blank" class="text-lg"><h1>${url}</h1></a>   
+          </div>`;
+      } else if (block.type === "divider") {
+        return `<hr class="my-5"/>`;
+      } else if (block.type == "callout") {
+        const res = block.callout.rich_text[0].plain_text;
+        const icon = block.callout.icon.emoji;
+        return `<div class="mx-5 bg-slate-400 bg-opacity-70 pb-3">
+            <p class="text-justify text-lg mx-3 pb-3">${icon + " " + res}</p>
+          </div>`;
+      } else if (block.type === "file") {
+        const url = block.file.external.url;
+        return `<a href=${url} target="_blank" class="text-lg pb-3">Ver archivo adjunto : <span class="material-symbols-outlined">
+          attach_file
+          </span></a>`;
+      } else if (block.type === "code") {
+        const code = block.code.rich_text[0].plain_text;
+        const language = block.code.language;
+        return `<div class="bg-gray-800 px-7 py-7 text-sm mb-3 ">
+        <h3 class="text-xl text-yellow-900 my-2">${language}:</h3>
+            <pre class="text-gray-500"><p >${code}</p></pre>
+          </div>`;
       }
     })
     .filter(Boolean);
