@@ -5,10 +5,10 @@ import Link from "next/link";
 
 const Blog = ({ blog }) => {
   return (
-    <div class="bg-green-900 justify-between p-12">
+    <div class="bg-otrocafe justify-between p-12">
       <div class="flex items-start">
         <Link href={"/blogs"}>
-          <button type="" class="bg-red-600 p-2 rounded-lg">
+          <button type="" class="bg-cafe p-2 rounded-lg hover:bg-mostaza">
             Atrás
           </button>
         </Link>
@@ -21,6 +21,13 @@ const Blog = ({ blog }) => {
         author={blog.author}
         imageProfile={blog.imageProfile}
       />
+      <div class="flex items-center">
+        <Link href={"/blogs"}>
+          <button type="" className="bg-cafe p-2 rounded-lg hover:bg-mostaza">
+            Regresar
+          </button>
+        </Link>
+      </div>
 
       {/* <pre class="mx-auto">{JSON.stringify(blog, null, 2)}</pre> */}
     </div>

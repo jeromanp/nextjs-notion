@@ -5,17 +5,19 @@ import slugify from "slugify";
 const BlogPage = ({ blogs }) => {
   // console.log(blogs);
   return (
-    <div className="h-screen bg-teal-900 justify-between p-12">
-      <div className="items start flex">
-        <Link href={"/"}>
-          <button type="" className="bg-red-600 p-2 rounded-lg">
-            Atrás
-          </button>
-        </Link>
-      </div>
-
+    <div className="h-screen w-screen bg-cafe justify-between p-20 inline-table">
       {/* <!-- ====== Blog Section Start --> */}
-      <section className="bg-sky-900 pt-20 lg:pt-[120px] pb-10 lg:pb-20">
+      <section className="bg-otrocafe pt-20 lg:pt-[120px] pb-10 lg:pb-20">
+        <div className="container mx-auto items start flex">
+          <Link href={"/"}>
+            <button
+              type=""
+              className="bg-cafe p-2 rounded-lg hover:bg-mostaza ml-20"
+            >
+              Atrás
+            </button>
+          </Link>
+        </div>
         <div className="container">
           <div className="flex flex-wrap justify-center -mx-4">
             <div className="w-full px-4">
@@ -65,7 +67,8 @@ const BlogPage = ({ blogs }) => {
                     <div>
                       <span
                         className="
-                      bg-blue-400
+                      bg-cafe
+                      text-white
                       rounded-md
                       inline-block
                       text-center
@@ -74,7 +77,6 @@ const BlogPage = ({ blogs }) => {
                       text-xs
                       leading-loose
                       font-semibold
-                      text-sky-950
                       mb-5"
                       >
                         {blog.datePublic}
@@ -91,8 +93,8 @@ const BlogPage = ({ blogs }) => {
               mb-4
               inline-block
               text-dark
-              hover:text-blue-500
-              text-lime-500"
+              hover:text-crema
+              text-cafe"
                           >
                             {blog.title}
                           </h3>
