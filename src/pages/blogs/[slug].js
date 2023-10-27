@@ -8,7 +8,7 @@ const Blog = ({ blog }) => {
     <div class="bg-otrocafe justify-between p-12">
       <div class="flex items-start">
         <Link href={"/blogs"}>
-          <button type="" class="bg-cafe p-2 rounded-lg hover:bg-mostaza">
+          <button type="" class="bg-cafe p-2 rounded-lg hover:bg-mostaza mb-5">
             Atrás
           </button>
         </Link>

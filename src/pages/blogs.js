@@ -5,14 +5,14 @@ import slugify from "slugify";
 const BlogPage = ({ blogs }) => {
   // console.log(blogs);
   return (
-    <div className="h-screen w-screen bg-cafe justify-between p-20 inline-table">
+    <div className="h-screen w-screen bg-cafe justify-between p-5 md:p-10 lg:p-20 inline-table">
       {/* <!-- ====== Blog Section Start --> */}
       <section className="bg-otrocafe pt-20 lg:pt-[120px] pb-10 lg:pb-20">
         <div className="container mx-auto items start flex">
           <Link href={"/"}>
             <button
               type=""
-              className="bg-cafe p-2 rounded-lg hover:bg-mostaza ml-20"
+              className="bg-cafe p-2 rounded-lg hover:bg-mostaza ml-5 md:ml-10 lg:ml-20"
             >
               Atrás
             </button>

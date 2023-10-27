@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Home({ quote }) {
   return (
     <>
-      <main className="h-screen bg-crema justify-between p-12">
+      <main className="h-full bg-crema justify-between p-12">
         <div className="container mx-auto">
           <div className="">
             <h1 className="my-10 text-5xl text-cafe">Bienvenido! </h1>
