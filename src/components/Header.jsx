@@ -13,11 +13,11 @@ export default function Header() {
           />
         </Link>
 
-        <span className="font-semibold text-xl tracking-tight text-cafe">
+        <span className="font-semibold md:text-lg lg:text-xl tracking-tight text-cafe hidden md:inline">
           Jose Eduardo Roman
         </span>
       </div>
-      <div className="block lg:hidden">
+      {/* <div className="block lg:hidden">
         <button className="flex items-center px-3 py-2 border rounded text-blue-200 border-teal-800 hover:text-white hover:border-white">
           <svg
             className="fill-current h-3 w-3"
@@ -28,24 +28,24 @@ export default function Header() {
             <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
           </svg>
         </button>
-      </div>
+      </div> */}
       <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-        <div className="text-base lg:flex-grow ml-20">
+        <div className="text-xs md:text-base lg:text-lg lg:flex-grow ml-20 flex flex-col md:flex-row">
           <Link
             href={"/"}
-            className="block mt-4 lg:inline-block lg:mt-0 text-crema hover:text-white mr-12"
+            className="block mt-4 lg:inline-block lg:mt-0 text-crema hover:text-white lg:mr-12"
           >
             Inicio
           </Link>
           <Link
             href={"/recipes"}
-            className="block mt-4 lg:inline-block lg:mt-0 text-crema hover:text-white mr-12"
+            className="block mt-4 lg:inline-block lg:mt-0 text-crema hover:text-white md:mx-5 lg:mx-12"
           >
             Ejemplo Recetas
           </Link>
           <Link
             href={"/blogs"}
-            className="block mt-4 lg:inline-block lg:mt-0 text-crema hover:text-white mr-12"
+            className="block mt-4 lg:inline-block lg:mt-0 text-crema hover:text-white lg:mr-12"
           >
             Ejemplo Blog
           </Link>

@@ -4,7 +4,7 @@ import slugify from "slugify";
 
 const RecipePage = ({ recipes }) => {
   return (
-    <main className="h-screen bg-crema justify-between p-24">
+    <main className="h-screen bg-crema justify-between p-10 md:p-16 lg:p-24">
       <div className="items start flex">
         <Link href={"/"}>
           <button type="" className="bg-cafe p-2 rounded-lg hover:bg-mostaza">
@@ -13,7 +13,7 @@ const RecipePage = ({ recipes }) => {
         </Link>
       </div>
       <div className="">
-        <h1 className="p-12 text-4xl flex justify-center text-gray-950">
+        <h1 className="p-12 text-2xl md:text-4xl flex justify-center text-gray-950">
           Todas las Recetas:
         </h1>
         {recipes.map((recipe) => (
