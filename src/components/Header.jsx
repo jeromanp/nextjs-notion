@@ -9,7 +9,7 @@ export default function Header() {
           <img
             src="/assets/logo.png"
             alt="Logo Jose Eduardo Roman"
-            classNameName="w-32 h-32"
+            className="w-32 h-32"
           />
         </Link>
 
