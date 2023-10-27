@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <nav className="flex items-center justify-between flex-wrap p-6 bg-mostaza">
-      <div className="flex items-center flex-shrink-0 text-white mr-6">
+    <nav className="flex items-center justify-between p-6 bg-mostaza">
+      <div className="flex items-center text-white mr-6">
         <Link href={"/"}>
           <img
             src="/assets/logo.png"

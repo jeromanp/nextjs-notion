@@ -5,10 +5,10 @@ import Recipes from "@/components/Recipes";
 
 const Recipe = ({ recipe }) => {
   return (
-    <div className="bg-green-900 justify-between p-12">
+    <div className="bg-orange-500 bg-opacity-50 justify-between p-12">
       <div className="flex items-start">
         <Link href={"/recipes"}>
-          <button type="" className="bg-red-600 p-2 rounded-lg">
+          <button type="" className="bg-cafe p-2 rounded-lg hover:bg-mostaza">
             Atrás
           </button>
         </Link>
