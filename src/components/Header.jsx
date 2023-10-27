@@ -30,7 +30,7 @@ export default function Header() {
         </button>
       </div>
       <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-        <div className="text-sm lg:flex-grow ml-20">
+        <div className="text-base lg:flex-grow ml-20">
           <Link
             href={"/"}
             className="block mt-4 lg:inline-block lg:mt-0 text-crema hover:text-white mr-12"
