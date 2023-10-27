@@ -38,10 +38,7 @@ const BlogPage = ({ blogs }) => {
                   Visita Nuestro Contenido Reciente
                 </h2>
                 <p className="text-base text-gray-400">
-                  ellentesque ipsum erat, molestie nec sodales eget, feugiat ac
-                  augue. Integer semper eget tortor et luctus. Nunc bibendum
-                  turpis ut enim condimentum vestibulum. Nullam a metus
-                  consectetur, elementum sapien bibendum, interdum orci.
+                  
                 </p>
               </div>
             </div>
@@ -113,7 +110,7 @@ const BlogPage = ({ blogs }) => {
         </div>
       </section>
 
-      {/* <pre classNameName="mx-auto">{JSON.stringify(blogs, null, 2)}</pre> */}
+      {/* <pre className="mx-auto">{JSON.stringify(blogs, null, 2)}</pre> */}
     </div>
   );
 };
