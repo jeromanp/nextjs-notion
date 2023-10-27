@@ -16,6 +16,7 @@ module.exports = {
         mostaza: "#975300",
         crema: "#d5ba99",
         cafe: "#3c2100",
+        otrocafe:"#6a4519",
       },
     },
   },
